@@ -1,0 +1,69 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Cartinha {
+  id        String    @id @default(uuid())
+  nome      String
+  endereco  String
+  cep       String
+  cidade    String
+  estado    String
+
+  @@map("cartinha")
+
+  pedido_id    String @unique
+  pedido Pedido @relation(fields: [pedido_id], references: [id])
+  papainoel_id String
+  papainoel PapaiNoel @relation(fields: [papainoel_id], references: [id])
+}
+
+model Pedido {
+  id          String    @id @default(uuid())
+  descricao   String
+  ano         Int
+  status      String    // Pendente, Concedido, Negado
+  rota_id     String @unique
+  rota        Rota? @relation(fields: [rota_id], references: [id])
+
+  @@map("pedido")
+
+  papainoel_id String @unique
+  papainoel PapaiNoel? @relation(fields: [papainoel_id], references: [id])
+
+  pedido PedidoConcedido? 
+  cartinha Cartinha?
+
+}
+
+model PapaiNoel {
+  id             String    @id @default(uuid())
+  nome String
+  cartinhas      Cartinha[]
+  pedidosPendentes Pedido[]
+  @@map("papainoel")
+}
+
+model Rota {
+  id                  String    @id @default(uuid())
+  cidade              String
+  pedidosPendentes    Pedido[]
+
+  @@map("rota")
+}
+
+model PedidoConcedido {
+  id                  String    @id @default(uuid())
+  pedido_id String @unique
+  pedido              Pedido @relation(fields: [pedido_id], references: [id])
+  dadosEntrega        String
+
+  @@map("pedido_concedido")
+}
+
+
