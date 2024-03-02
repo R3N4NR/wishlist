@@ -26,6 +26,20 @@ class CreatePedidoStatusService{
                 dadosEntrega: true,
             }
         })
+        
+        if(pedidoStatus){
+            const updateStatusDoPedido = await prismaClient.pedido.update({
+                where:{
+                    id: pedido_id
+                },
+                data:{
+                    status: "CONCEDIDO"
+                },
+                select:{
+                    status: true
+                }
+            })
+        }
         return pedidoStatus
     }catch(err){
         createError(err, 'PedidoConcedido')

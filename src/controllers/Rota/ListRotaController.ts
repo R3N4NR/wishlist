@@ -1,14 +1,18 @@
 import { ListRotaService } from "../../services/Rota/ListRotaService";
-import { Response } from "express";
+import { Request, Response } from "express";
 
 
 class ListRotaController{
 
-    async handler(res: Response){
-         const rotaService = new ListRotaService();
-         const rota = await rotaService.execute();
+    async handler(req: Request, res: Response){
+        try {
+            const rotaService = new ListRotaService();
+            const rota = await rotaService.execute();
 
-         return res.json(rota)
+            return res.json(rota);
+        } catch (err: any) {
+            return res.status(500).json({ error: err.message }); // Trate os erros adequadamente.
+        }
     }
 }
 

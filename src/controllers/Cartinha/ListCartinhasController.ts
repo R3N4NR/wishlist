@@ -1,9 +1,9 @@
 import { ListCartinhasServices } from "../../services/Cartinha/ListCartinhasServices";
-import { Response } from "express";
+import { Request, Response } from "express";
 
 class ListCartinhasController{
 
-    async handler(res: Response){
+    async handler(req: Request,res: Response){
 
         const listCartinhas = new ListCartinhasServices();
 

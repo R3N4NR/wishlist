@@ -33,7 +33,7 @@ model Pedido {
 
   @@map("pedido")
 
-  papainoel_id String @unique
+  papainoel_id String 
   papainoel PapaiNoel? @relation(fields: [papainoel_id], references: [id])
 
   pedido PedidoConcedido? 

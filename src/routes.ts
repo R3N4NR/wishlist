@@ -8,6 +8,7 @@ import { CreatePapaiNoelController } from './controllers/PapaiNoel/CreatePapaiNo
 import { ListRotaController } from './controllers/Rota/ListRotaController';
 import { CreateRotaController } from './controllers/Rota/CreateRotaController';
 import { CreatePedidoStatusController } from './controllers/StatusPedido/CreatePedidoConcedidoController';
+import { ListPedidoByStatusController } from './controllers/Pedido/ListPedidoByStatusController';
 
 export const router = Router();
 
@@ -18,6 +19,8 @@ router.post('/cartinhas/create', new CreateCartinhaController().handler);
 router.get('/pedidos', new ListPedidoController().handler);
 
 router.post('/pedidos/create', new CreatePedidoController().handler);
+
+router.get('/pedidos/status', new ListPedidoByStatusController().handler)
 
 router.get('/papainoel', new ListPapaiNoelController().handler);
 
