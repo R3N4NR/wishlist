@@ -1,3 +1,4 @@
+import { listError } from "../../errors/listErrors";
 import prismaClient from "../../prisma/prismaClient";
 
 
@@ -5,7 +6,7 @@ import prismaClient from "../../prisma/prismaClient";
 class ListCartinhasServices{
 
     async execute(){
-
+        try{
         const listCartinhas = await prismaClient.cartinha.findMany({
             select: {
                 id: true,
@@ -20,6 +21,9 @@ class ListCartinhasServices{
         })
 
         return listCartinhas;
+    }catch (err: any) {
+        listError(err) // Trate os erros adequadamente.
+    }
     }
 }
 

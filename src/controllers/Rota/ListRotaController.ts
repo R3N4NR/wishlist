@@ -11,7 +11,7 @@ class ListRotaController{
 
             return res.json(rota);
         } catch (err: any) {
-            return res.status(500).json({ error: err.message }); // Trate os erros adequadamente.
+            return res.status(500).json({ error: err.message });
         }
     }
 }

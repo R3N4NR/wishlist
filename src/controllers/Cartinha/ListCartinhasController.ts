@@ -8,9 +8,8 @@ class ListCartinhasController{
         const listCartinhas = new ListCartinhasServices();
 
         const cartinhas = await listCartinhas.execute();
-
-        return cartinhas;
-        
+ 
+        return res.json(cartinhas)
     }
 }
 
