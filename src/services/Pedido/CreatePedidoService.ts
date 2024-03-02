@@ -6,15 +6,14 @@ import prismaClient from "../../prisma/prismaClient";
 interface PedidoProps{
     descricao: string;
     ano: number;
-    status: string;
     rota_id: string;
     papainoel_id: string;
 }
 class CreatePedidoService {
 
 
-    async execute({descricao, ano, status,papainoel_id,rota_id}: PedidoProps){
-        const fieldEmpty = validateFields(descricao,ano, status, rota_id,papainoel_id)
+    async execute({descricao, ano,papainoel_id,rota_id}: PedidoProps){
+        const fieldEmpty = validateFields(descricao,ano, rota_id,papainoel_id)
         if(fieldEmpty){
             emptyFields();
         }
@@ -32,8 +31,7 @@ class CreatePedidoService {
                         connect:{
                             id: rota_id,
                         }
-                    },
-                    status: status
+                    } 
                 },
                 select:{
                     id: true,
@@ -47,7 +45,7 @@ class CreatePedidoService {
 
             return pedido
         }catch(err){
-            createError(err)
+            createError(err, 'pedido', 'pedido')
         }
     }
 }

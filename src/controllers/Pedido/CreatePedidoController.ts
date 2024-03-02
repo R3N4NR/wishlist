@@ -5,14 +5,12 @@ class CreatePedidoController{
 
     async handler(req: Request, res: Response){
 
-        const {descricao, ano, status,papainoel_id,rota_id} = req.body;
+        const {descricao, ano,papainoel_id,rota_id} = req.body;
         const pedidoService = new CreatePedidoService();
         const pedido = await pedidoService.execute({
             descricao, 
-            ano, 
-            status,
+            ano,
             papainoel_id,
-            
             rota_id
         })
 

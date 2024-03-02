@@ -6,7 +6,11 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
-
+enum Status{
+  PENDENTE
+  CONCEDIDO
+  REJEITADO
+}
 model Cartinha {
   id        String    @id @default(uuid())
   nome      String
@@ -27,8 +31,8 @@ model Pedido {
   id          String    @id @default(uuid())
   descricao   String
   ano         Int
-  status      String    // Pendente, Concedido, Negado
-  rota_id     String @unique
+  status      Status @default(PENDENTE)    
+  rota_id     String 
   rota        Rota? @relation(fields: [rota_id], references: [id])
 
   @@map("pedido")
