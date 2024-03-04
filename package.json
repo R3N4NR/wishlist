@@ -18,6 +18,7 @@
     "typescript": "^5.3.3"
   },
   "scripts": {
-    "dev": "ts-node-dev --transpile-only src/server.ts"
+    "dev": "ts-node-dev --transpile-only src/server.ts",
+    "build": "ts-node-dev --transpile-only src/server.build.ts"
   }
 }
